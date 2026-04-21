@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<robot name="Assem1">
+
+  <link name="base_footprint"/>
+  
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.73958 -1.3465 0.84" rpy="0 0 0" />
+      <mass value="5.0" />
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://Assem1/meshes/base_link.STL" />
+      </geometry>
+      <material name=""><color rgba="0.79216 0.81961 0.93333 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0.739 -1.3465 0.95" rpy="0 0 0" />
+      <geometry>
+        <box size="0.4 0.3 0.1" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="base_link">
+    <material>Gazebo/Blue</material>
+    <selfCollide>false</selfCollide>
+  </gazebo>
+
+  <link name="caster_front">
+    <collision><geometry><sphere radius="0.049"/></geometry></collision>
+    <inertial><mass value="0.1"/><inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/></inertial>
+  </link>
+  <joint name="caster_front_joint" type="fixed">
+    <parent link="base_link"/><child link="caster_front"/>
+    <origin xyz="0.85 -1.3465 0.89157" rpy="0 0 0"/>
+  </joint>
+  <gazebo reference="caster_front"><mu1>0.0</mu1><mu2>0.0</mu2><kp>10000000.0</kp><kd>1.0</kd><minDepth>0.001</minDepth></gazebo>
+
+  <link name="caster_back">
+    <collision><geometry><sphere radius="0.049"/></geometry></collision>
+    <inertial><mass value="0.1"/><inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/></inertial>
+  </link>
+  <joint name="caster_back_joint" type="fixed">
+    <parent link="base_link"/><child link="caster_back"/>
+    <origin xyz="0.60 -1.3465 0.89157" rpy="0 0 0"/>
+  </joint>
+  <gazebo reference="caster_back"><mu1>0.0</mu1><mu2>0.0</mu2><kp>10000000.0</kp><kd>1.0</kd><minDepth>0.001</minDepth></gazebo>
+
+  <link name="banhtrai">
+    <inertial><origin xyz="0 0 0" rpy="0 0 0" /><mass value="1.0" /><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" /></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0" /><geometry><mesh filename="package://Assem1/meshes/banhtrai.STL" /></geometry></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0" /><geometry><sphere radius="0.05" /></geometry></collision>
+  </link>
+  <gazebo reference="banhtrai"><material>Gazebo/DarkGrey</material><mu1>50.0</mu1><mu2>50.0</mu2><kp>10000000.0</kp><kd>1.0</kd><minDepth>0.001</minDepth><selfCollide>false</selfCollide></gazebo>
+
+  <joint name="banhtrai_joint" type="continuous">
+    <origin xyz="0.73958 -1.2665 0.89157" rpy="1.5708 0 3.1416" />
+    <parent link="base_link" /><child link="banhtrai" />
+    <axis xyz="0 0 1" />
+    <dynamics damping="0.1" friction="0.1" />
+  </joint>
+
+  <link name="banhphai">
+    <inertial><origin xyz="0 0 0" rpy="0 0 0" /><mass value="1.0" /><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" /></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0" /><geometry><mesh filename="package://Assem1/meshes/banhphai.STL" /></geometry></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0" /><geometry><sphere radius="0.05" /></geometry></collision>
+  </link>
+  <gazebo reference="banhphai"><material>Gazebo/DarkGrey</material><mu1>50.0</mu1><mu2>50.0</mu2><kp>10000000.0</kp><kd>1.0</kd><minDepth>0.001</minDepth><selfCollide>false</selfCollide></gazebo>
+
+  <joint name="banhphai_joint" type="continuous">
+    <origin xyz="0.73958 -1.4265 0.89157" rpy="1.5708 0 0" />
+    <parent link="base_link" /><child link="banhphai" />
+    <axis xyz="0 0 -1" />
+    <dynamics damping="0.1" friction="0.1" />
+  </joint>
+
+  <link name="khopdich">
+    <inertial><origin xyz="0 0 0" rpy="0 0 0" /><mass value="0.2" /><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005" /></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0" /><geometry><mesh filename="package://Assem1/meshes/khopdich.STL" /></geometry></visual>
+  </link>
+  <gazebo reference="khopdich"><material>Gazebo/Green</material><selfCollide>false</selfCollide></gazebo>
+
+<joint name="khopdich_joint" type="prismatic">
+    <origin xyz="0.67572 -1.3465 0.90857" rpy="1.5708 0 1.5708" />
+    <parent link="base_link" />
+    <child link="khopdich" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-0.015" upper="0.015" effort="100.0" velocity="0.5" />
+    <dynamics damping="100" friction="100" />
+  </joint>
+
+  <link name="khau1">
+    <inertial><origin xyz="0 0 0" rpy="0 0 0" /><mass value="0.2" /><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005" /></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0" /><geometry><mesh filename="package://Assem1/meshes/khau1.STL" /></geometry></visual>
+  </link>
+  <gazebo reference="khau1"><material>Gazebo/Orange</material><selfCollide>false</selfCollide></gazebo>
+
+  <joint name="khau1_joint" type="revolute">
+    <origin xyz="0.005 0.04 0" rpy="3.1416 -1.5708 3.1416" />
+    <parent link="khopdich" /><child link="khau1" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1" upper="2" effort="500.0" velocity="5.0" />
+    <dynamics damping="100.0" friction="100.0" />
+  </joint>
+
+  <link name="lidar">
+    <inertial><origin xyz="0 0 0" rpy="0 0 0" /><mass value="0.1" /><inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" /></inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0" />
+      <geometry><mesh filename="package://Assem1/meshes/lidar.STL" /></geometry>
+    </visual>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0.60606 -1.3465 0.94637" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="lidar" />
+  </joint>
+
+  <gazebo reference="lidar">
+    <material>Gazebo/Red</material>
+    <selfCollide>false</selfCollide>
+    <sensor name="lidar_sensor" type="ray">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>20</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range><min>0.15</min><max>10.0</max><resolution>0.01</resolution></range>
+      </ray>
+      <plugin name="lidar_plugin" filename="libgazebo_ros_ray_sensor.so">
+        <ros><remapping>~/out:=scan</remapping></ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <link name="camera_link">
+    <inertial>
+      <mass value="0.02"/>
+      <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0.95 -1.3465 0.9" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+  </joint>
+
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera_sensor">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>800<far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+      <command_topic>cmd_vel</command_topic>
+      <update_rate>100</update_rate>
+      <left_joint>banhtrai_joint</left_joint>
+      <right_joint>banhphai_joint</right_joint>
+      <wheel_separation>0.16</wheel_separation>
+      <wheel_diameter>0.10</wheel_diameter>
+      <max_wheel_torque>100.0</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+    </plugin>
+  </gazebo>
+
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    <joint name="khopdich_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="khau1_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>/home/mukoro/ros2_ws/src/Assem1/config/arm_controller.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+</robot>
