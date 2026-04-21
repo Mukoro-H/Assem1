@@ -27,7 +27,7 @@ sudo apt install ros-humble-teleop-twist-keyboard -y
 Tại terminal 1(Chạy Gazebo và RViz):
 cd ~/ros2_ws
 killall -9 gzserver gzclient rviz2 robot_state_publisher joint_state_publisher spawner
-rm -rf build/ install/ log/ ~/.gazebo/log/*
+rm -rf build/ install/ log/ *~/.gazebo/log/*
 rm -rf build/ install/ log/
 colcon build --packages-select Assem1
 source install/setup.bash
